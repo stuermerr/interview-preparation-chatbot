@@ -215,7 +215,7 @@ def test_generate_chat_completion_omits_response_format(monkeypatch):
 
     # Call the chat wrapper and capture the result.
     ok, result = openai_client.generate_chat_completion(
-        messages, temperature=0.1, model_name=get_allowed_models()[0]
+        messages, temperature=0.1, model_name="gpt-4o-mini"
     )
 
     assert ok is True

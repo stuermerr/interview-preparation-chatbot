@@ -7,13 +7,13 @@ def test_get_allowed_models_returns_expected_list():
     """Verify get allowed models returns expected list."""
     # Ensure the catalog exposes the supported models in order.
     models = get_allowed_models()
-    assert models == ["gpt-4o-mini", "gpt-5-nano", "gpt-5.1", "gpt-5.2-chat-latest"]
+    assert models == ["gpt-5.1", "gpt-5-nano"]
 
 
 def test_default_model_is_in_catalog():
     """Verify default model is in catalog."""
-    # Confirm the default model is the intended GPT-5.2 option and is selectable.
-    assert DEFAULT_MODEL == "gpt-5.2-chat-latest"
+    # Confirm the default model is the intended GPT-5.1 option and is selectable.
+    assert DEFAULT_MODEL == "gpt-5.1"
     assert DEFAULT_MODEL in get_allowed_models()
 
 
