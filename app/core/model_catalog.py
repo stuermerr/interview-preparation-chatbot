@@ -6,14 +6,16 @@ from __future__ import annotations
 ALLOWED_MODELS: list[str] = [
     "gpt-4o-mini",
     "gpt-5-nano",
+    "gpt-5.1",
     "gpt-5.2-chat-latest",
 ]
 
 # Default to GPT-5.2 chat for the landing-page experience.
 DEFAULT_MODEL = "gpt-5.2-chat-latest"
-GPT5_MODELS = {"gpt-5-nano", "gpt-5.2-chat-latest"}
+GPT5_MODELS = {"gpt-5-nano", "gpt-5.1", "gpt-5.2-chat-latest"}
 _REASONING_EFFORT_BY_MODEL = {
     "gpt-5-nano": ["minimal", "low", "medium", "high"],
+    "gpt-5.1": ["minimal", "low", "medium", "high"],
 }
 DEFAULT_REASONING_EFFORT = "medium"
 
