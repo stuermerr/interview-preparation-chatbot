@@ -16,8 +16,8 @@ from app.core.safety import (
 
 def test_configured_jd_and_cv_limits_match_requirements():
     """Verify JD and CV limits are set to the required value."""
-    assert MAX_JOB_DESCRIPTION_LENGTH == 8000
-    assert MAX_CV_LENGTH == 8000
+    assert MAX_JOB_DESCRIPTION_LENGTH == 10000
+    assert MAX_CV_LENGTH == 10000
 
 
 def test_injection_phrase_triggers_refusal():

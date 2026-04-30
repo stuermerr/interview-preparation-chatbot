@@ -15,9 +15,9 @@ except ImportError:  # pragma: no cover - exercised when dependency is missing
     OpenAI = None
 
 # Length limits keep payloads bounded for safety and cost.
-MAX_JOB_DESCRIPTION_LENGTH = 8000
-MAX_CV_LENGTH = 8000
-MAX_USER_PROMPT_LENGTH = 2000
+MAX_JOB_DESCRIPTION_LENGTH = 10000
+MAX_CV_LENGTH = 10000
+MAX_USER_PROMPT_LENGTH = 10000
 MAX_CHAT_USER_PROMPT_LENGTH = 30000
 
 # Heuristic patterns for common prompt-injection attempts.
