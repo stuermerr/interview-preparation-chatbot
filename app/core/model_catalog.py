@@ -4,6 +4,7 @@ from __future__ import annotations
 
 # Centralize model choices so UI and client stay consistent.
 ALLOWED_MODELS: list[str] = [
+    "gpt-5.4-mini",
     "gpt-5.1",
     "gpt-5-nano",
     # "gpt-4o-mini",
@@ -11,11 +12,12 @@ ALLOWED_MODELS: list[str] = [
 ]
 
 # Default to GPT-5.1 as the first-choice model in the dropdown.
-DEFAULT_MODEL = "gpt-5.1"
-GPT5_MODELS = {"gpt-5-nano", "gpt-5.1", "gpt-5.2-chat-latest"}
+DEFAULT_MODEL = "gpt-5.4-mini"
+GPT5_MODELS = {"gpt-5-nano", "gpt-5.1", "gpt-5.4-mini", "gpt-5.2-chat-latest"}
 _REASONING_EFFORT_BY_MODEL = {
     "gpt-5-nano": ["minimal", "low", "medium", "high"],
     "gpt-5.1": ["minimal", "low", "medium", "high"],
+    "gpt-5.4-mini": ["minimal", "low", "medium", "high"],
 }
 DEFAULT_REASONING_EFFORT = "medium"
 
