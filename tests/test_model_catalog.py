@@ -7,18 +7,26 @@ def test_get_allowed_models_returns_expected_list():
     """Verify get allowed models returns expected list."""
     # Ensure the catalog exposes the supported models in order.
     models = get_allowed_models()
-    assert models == ["gpt-5.1", "gpt-5-nano"]
+    assert models == ["gpt-5.5", "gpt-5.4-mini", "gpt-5.1", "gpt-5-nano"]
 
 
 def test_default_model_is_in_catalog():
     """Verify default model is in catalog."""
-    # Confirm the default model is the intended GPT-5.1 option and is selectable.
-    assert DEFAULT_MODEL == "gpt-5.1"
+    # Confirm the default model is the intended GPT-5.5 option and is selectable.
+    assert DEFAULT_MODEL == "gpt-5.5"
     assert DEFAULT_MODEL in get_allowed_models()
 
 
 def test_get_reasoning_effort_options_for_gpt5():
     """Verify get reasoning effort options for gpt5."""
+    # GPT-5.5 exposes the current flagship reasoning effort controls.
+    assert get_reasoning_effort_options("gpt-5.5") == [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+    ]
     # GPT-5 nano exposes reasoning effort controls.
     assert get_reasoning_effort_options("gpt-5-nano") == [
         "minimal",

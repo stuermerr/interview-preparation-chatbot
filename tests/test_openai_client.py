@@ -170,6 +170,35 @@ def test_generate_completion_gpt51_uses_reasoning_effort(monkeypatch):
     assert last_kwargs["reasoning_effort"] == "high"
 
 
+def test_generate_completion_gpt55_uses_reasoning_effort(monkeypatch):
+    """Verify gpt-5.5 requests use reasoning effort and omit temperature."""
+    # Track client creation to inspect the request parameters.
+    created_clients: list[_DummyOpenAI] = []
+
+    def _factory():
+        return _DummyOpenAI(created_clients)
+
+    monkeypatch.setattr(openai_client, "OpenAI", _factory)
+    messages = [
+        {"role": "system", "content": "system"},
+        {"role": "user", "content": "user"},
+    ]
+
+    ok, result = openai_client.generate_completion(
+        messages,
+        temperature=None,
+        model_name="gpt-5.5",
+        reasoning_effort="xhigh",
+    )
+
+    assert ok is True
+    assert result == "mocked-response"
+    last_kwargs = created_clients[0].chat.completions.last_kwargs
+    assert last_kwargs["model"] == "gpt-5.5"
+    assert "temperature" not in last_kwargs
+    assert last_kwargs["reasoning_effort"] == "xhigh"
+
+
 def test_generate_completion_chat_latest_uses_defaults(monkeypatch):
     """Verify generate completion chat latest uses defaults."""
     # Track client creation to inspect the request parameters.

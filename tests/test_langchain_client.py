@@ -279,6 +279,36 @@ def test_generate_langchain_chat_response_uses_gpt51_model_settings(monkeypatch)
     assert client_kwargs.get("model_kwargs", {}).get("reasoning_effort") == "high"
 
 
+def test_generate_langchain_chat_response_uses_gpt55_model_settings(monkeypatch):
+    """Verify LangChain chat wrapper applies gpt-5.5 model settings."""
+    created_clients: list[_DummyChatOpenAI] = []
+    _DummyChatOpenAI.next_response = "chat reply"
+
+    def _factory(**kwargs):
+        return _DummyChatOpenAI(created_clients, **kwargs)
+
+    monkeypatch.setattr(langchain_client, "ChatOpenAI", _factory)
+
+    payload = RequestPayload(
+        job_description="JD",
+        cv_text="CV",
+        user_prompt="User prompt",
+        prompt_variant_id=101,
+        temperature=None,
+        model_name="gpt-5.5",
+        reasoning_effort="xhigh",
+    )
+
+    ok, result = langchain_client.generate_langchain_chat_response(payload)
+
+    assert ok is True
+    assert result == "chat reply"
+    assert created_clients
+    client_kwargs = created_clients[0].kwargs
+    assert client_kwargs["model"] == "gpt-5.5"
+    assert client_kwargs.get("model_kwargs", {}).get("reasoning_effort") == "xhigh"
+
+
 def test_generate_langchain_chat_summary_returns_text(monkeypatch):
     """Verify LangChain chat summary wrapper returns plain text."""
     created_clients: list[_DummyChatOpenAI] = []
